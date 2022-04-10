@@ -1,5 +1,5 @@
 // Core
-import { Module } from '@nestjs/common';
+import { forwardRef, Module } from '@nestjs/common';
 // Packages
 import { JwtModule } from '@nestjs/jwt';
 // Services
@@ -13,11 +13,12 @@ import { UsersModule } from 'src/users/users.module';
   providers: [AuthService],
   controllers: [AuthController],
   imports: [
-    UsersModule,
+    forwardRef(() => UsersModule),
     JwtModule.register({
       secret: process.env.PRIVATE_KEY || 'secret',
       signOptions: { expiresIn: '24h' },
     }),
   ],
+  exports: [AuthService, JwtModule],
 })
 export class AuthModule {}
