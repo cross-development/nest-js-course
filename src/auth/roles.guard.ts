@@ -12,7 +12,7 @@ import { Reflector } from '@nestjs/core';
 import { Observable } from 'rxjs';
 import { JwtService } from '@nestjs/jwt';
 // Models
-import { User } from 'src/users/users.model';
+import { User } from '../users/users.model';
 // Decorators
 import { ROLES_KEY } from './roles-auth.decorator';
 

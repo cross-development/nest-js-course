@@ -4,11 +4,11 @@ import { HttpException, HttpStatus, Injectable, UnauthorizedException } from '@n
 import bcrypt from 'bcryptjs';
 import { JwtService } from '@nestjs/jwt';
 // Models
-import { User } from 'src/users/users.model';
+import { User } from '../users/users.model';
 // Services
-import { UsersService } from 'src/users/users.service';
+import { UsersService } from '../users/users.service';
 // Dto
-import { CreateUserDto } from 'src/users/dto/create-user.dto';
+import { CreateUserDto } from '../users/dto/create-user.dto';
 
 @Injectable()
 export class AuthService {
@@ -27,7 +27,7 @@ export class AuthService {
     const candidate = await this.userService.getUserByEmail(userDto.email);
 
     if (candidate) {
-      throw new HttpException('User already exists', HttpStatus.BAD_REQUEST);
+      throw new HttpException('USER_ALREADY_EXISTS', HttpStatus.BAD_REQUEST);
     }
 
     const hashPassword = await bcrypt.hash(userDto.password, 5);
